@@ -7,6 +7,6 @@ describe('SVGGrid', () => {
   it('renders the grid component', () => {
     render(<SVGGrid letter={['p','i','z','z','a']}/>)
     
-    expect(screen.getAllByText('p')).toBeInTheDocument(); // prints out the jsx in the App component unto the command line
+    expect(screen.getByTestId('1-2')).toBeInTheDocument(); // prints out the jsx in the App component unto the command line
   })
 })
