@@ -1,14 +1,17 @@
 import React from 'react';
 
-function SVGGrid() {
-  const gridSize = 5;
+function SVGGrid({letter}) {
+  const characters = 5;
+  const attempts = 5;
+
+  const word = letter;
 
   const generateGrid = () => {
     const grid = [];
-    for (let i = 0; i < gridSize; i++) {
+    for (let i = 0; i < characters; i++) {
       const row = [];
-      for (let j = 0; j < gridSize; j++) {
-        row.push('lightgrey'); // Vi trenger bare en plassholder her
+      for (let j = 0; j < attempts; j++) {
+        row.push('lightgrey');
       }
       grid.push(row);
     }
@@ -18,11 +21,14 @@ function SVGGrid() {
   const grid = generateGrid();
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: `repeat(${gridSize}, 50px)`, gap: '5px' }}>
+    <div style={{ display: 'grid', gridTemplateColumns: `repeat(${attempts}, 100px)`, gap: '10px' }}>
       {grid.map((row, rowIndex) =>
         row.map((color, colIndex) => (
-          <svg key={`${rowIndex}-${colIndex}`} width="50" height='50'>
-            <rect width='50px' height='50px' rx='15px' fill={row[colIndex]} />
+          <svg key={`${rowIndex}-${colIndex}`} width="100px" height='100px'>
+            
+            <rect width='100px' height='100px' rx='15px' fill={row[colIndex]} />
+            <text x={40} y={50}>{word[colIndex]}</text>
+            
           </svg>
         ))
       )}

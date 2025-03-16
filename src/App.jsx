@@ -47,7 +47,7 @@ function App() {
           answer is:{answerWord}
         </p>
       </div>
-      <SVGGrid/>
+      <SVGGrid letter={keyPresses}/>
     </>
   )
 }

@@ -1,4 +1,4 @@
-import wordList from "../wordlist.json"
+import wordList from '../wordlist.json'
 
 function generateAnswer() {
     const listOfWords = wordList.words;
