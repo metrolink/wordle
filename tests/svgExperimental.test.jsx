@@ -3,10 +3,11 @@ import { render, screen } from '@testing-library/react'
 import SVGGrid from '../src/svgExperimental'
 import { expect } from 'vitest'
 
-describe('SVGGrid', () => {
-  it('renders the grid component', () => {
+describe('testing if the grid is displaying correct colors', () => {
+  it('renders colors correctly', () => {
     render(<SVGGrid letter={['p','i','z','z','a']}/>)
     
-    expect(screen.getByTestId('1-2')).toBeInTheDocument(); // prints out the jsx in the App component unto the command line
+    expect(screen.getByTestId('0-2')).toHaveAttribute('fill','lightgrey');
+    expect(screen.getByTestId('0-3')).toHaveAttribute('fill','lightgrey')
   })
 })

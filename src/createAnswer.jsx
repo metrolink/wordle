@@ -20,10 +20,10 @@ export function checkWord(word, ans) {
 
     console.log(numberOfCorrect)
     if(numberOfCorrect === 5)
-        return 100
+        return true
     //console.log(arrayAns)
 
-    return numberOfCorrect;
+    return false;
     
 
     

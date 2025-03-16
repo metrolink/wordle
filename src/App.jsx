@@ -17,19 +17,21 @@ function App() {
   useEffect(() => {
     const onKeyDown = (e) => {
     if(attempt < attemptLimit){
+      if(!checkWord(keyPresses,answerWord)){
       if(keyPresses.length < wordlength){
         const updatedKeyPresses = [...keyPresses,e.key];
         setKeyPresses(updatedKeyPresses);
         console.log(e.key)
-        checkWord(updatedKeyPresses, answerWord);
+        //checkWord(updatedKeyPresses, answerWord);
       }
       else{
         setAttempt(attempt+1);
         setKeyPresses([e.key]);
         console.log(e.key)
-        checkWord(e.key, answerWord);
+        //checkWord(e.key, answerWord);
       }
     }
+  }
   }
    
     window.addEventListener('keydown', onKeyDown)
