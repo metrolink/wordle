@@ -4,8 +4,10 @@ function SVGGrid({letter}) {
   const characters = 5;
   const attempts = 5;
 
-  const word = letter;
-  console.log(word);
+
+  const wordArray = letter.map((ar) => ar.char)
+  const colorArray = letter.map((ar) => ar.color)
+  console.log(wordArray);
 
   const generateGrid = () => {
     const grid = [];
@@ -27,9 +29,9 @@ function SVGGrid({letter}) {
         row.map((color, colIndex) => 
           <svg key={`${rowIndex}-${colIndex}`} width="100px" height='100px'>
             
-            <rect data-testid={`${rowIndex}-${colIndex}`} width='100px' height='100px' rx='15px' fill={row[colIndex]} />
+            <rect className='wordle-tile' data-testid={`${rowIndex}-${colIndex}`} width='100px' height='100px' rx='15px' color='lightgrey' fill={colorArray[colIndex] ?? 'lightgrey'} />
             
-            <text x={40} y={50}>{word.map((ch) => ch.char[0])}</text>
+            <text x={40} y={50}>{wordArray[colIndex]}</text>
             
           </svg>
         )
