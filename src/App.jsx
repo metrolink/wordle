@@ -18,18 +18,18 @@ function App() {
     const onKeyDown = (e) => {
     if(attempt < attemptLimit){
       if(!checkWord(keyPresses,answerWord)){
-      if(keyPresses.length < wordlength){
-        const updatedKeyPresses = [...keyPresses,e.key];
-        setKeyPresses(updatedKeyPresses);
-        console.log(e.key)
-        //checkWord(updatedKeyPresses, answerWord);
-      }
-      else{
-        setAttempt(attempt+1);
-        setKeyPresses([e.key]);
-        console.log(e.key)
-        //checkWord(e.key, answerWord);
-      }
+        if(keyPresses.length < wordlength){
+          const updatedKeyPresses = [...keyPresses,{char: e.key, color: 'lightgrey'}];
+          setKeyPresses(updatedKeyPresses);
+          console.log(e.key)
+          //checkWord(updatedKeyPresses, answerWord);
+        }
+        else{
+          setAttempt(attempt+1);
+          setKeyPresses([{char: e.key, color: 'lightgrey'}]);
+          console.log(e.key)
+          //checkWord(e.key, answerWord);
+        }
     }
   }
   }
@@ -44,7 +44,7 @@ function App() {
       <p>Press buttons on your keyboard to begin</p>
       <div className="card">
         <p>
-          your letters are: {keyPresses.toString()}
+          your letters are: {keyPresses.map((ar) => ar.char)}
           <br/>
           answer is:{answerWord}
         </p>

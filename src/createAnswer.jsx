@@ -7,13 +7,18 @@ function generateAnswer() {
     return word;
 }
 
+export function validateAnswer(word, ans){
+    if(word === ans)
+        return 0;
+}
+
 export function checkWord(word, ans) {
     const arrayAns = ans
     let numberOfCorrect = 0;
 
 
     for (let letter of word){ 
-        if (arrayAns.includes(letter)) {
+        if (arrayAns.includes(letter.char)) {
             numberOfCorrect++;
         }
     }
