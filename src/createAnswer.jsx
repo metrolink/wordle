@@ -1,4 +1,5 @@
 import wordList from '../wordlist.json'
+import listOfWords from './words.json'
 
 function generateAnswer() {
     const listOfWords = wordList.words;
@@ -8,9 +9,36 @@ function generateAnswer() {
 }
 
 export function validateAnswer(word, ans){
-    if(word === ans)
-        return 0;
+    
+    const wordArray = word.map(ch => ch.char)
+    const wordString = wordArray.join('');
+    if(listOfWords.words.includes(wordString)){
+    const colorArray = word.map(clr => clr.color)
+    const keys = [];
+    for (let i = 0; i < wordArray.length; i++) {
+       if(wordArray[i] === ans[i]){
+        colorArray[i] = 'green';
+       }
+       else if(ans.includes(wordArray[i])){
+        if((wordString.match(/${ans[i]}/) || []).length > 1){
+        colorArray[i] = 'yellow'
+       }
+    }
+
+
+       
+        keys.push({char: wordArray[i],color: colorArray[i]})
+    }
+
+    return keys;
+    }
+    else{
+        console.log("not a valid word")
+        return [{char: 'f', color:'black'}]
+    }
 }
+
+
 
 export function checkWord(word, ans) {
     const arrayAns = ans

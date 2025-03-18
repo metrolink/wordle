@@ -1,6 +1,6 @@
 import {useState, useEffect } from 'react'
 import './App.css'
-import { answer, checkWord } from './createAnswer'
+import { answer, checkWord, validateAnswer} from './createAnswer'
 import {SvgDrawer} from './svgDrawer'
 import SVGGrid from './svgExperimental'
 
@@ -8,6 +8,7 @@ function App() {
   const [keyPresses, setKeyPresses] = useState([])
   const [answerWord] = useState(answer());
   const [attempt, setAttempt] = useState(0)
+  const [fullWords, setFullWords] = useState([keyPresses])
 
   const wordlength = 5;
   const attemptLimit = 5;
@@ -20,14 +21,21 @@ function App() {
       if(!checkWord(keyPresses,answerWord)){
         if(keyPresses.length < wordlength){
           const updatedKeyPresses = [...keyPresses,{char: e.key, color: 'lightgrey'}];
+          //console.log(updatedKeyPresses)
           setKeyPresses(updatedKeyPresses);
           console.log(e.key)
           //checkWord(updatedKeyPresses, answerWord);
+          if (keyPresses.length === wordlength -1){
+            const checkedWord = validateAnswer(updatedKeyPresses, answerWord)
+            console.log(checkedWord)
+            setKeyPresses(checkedWord)
+          }
         }
         else{
           setAttempt(attempt+1);
           setKeyPresses([{char: e.key, color: 'lightgrey'}]);
-          console.log(e.key)
+          setFullWords(...fullWords,[keyPresses])
+          console.log(fullWords)
           //checkWord(e.key, answerWord);
         }
     }
