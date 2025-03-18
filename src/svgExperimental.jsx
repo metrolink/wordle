@@ -1,20 +1,9 @@
+
 import React from 'react';
 
-function SVGGrid({letter}) {
+function SVGGrid(letter) {
   const characters = 5;
   const attempts = 5;
-
-  /*const testArray = {
-  '0':[{char:'o', color: 'lightgrey'},{char: 't', color: 'yellow'},{char: 't', color: 'green'},{char: 'e', color: 'green'},{char: 'r', color: 'green'}],
-  '1':[{char: 'f', color: 'lightgrey'},{char: 'g', color: 'lightgrey'},{char: 'h', color: 'lightgrey'},{char: 'j', color: 'lightgrey'},{char: 'k', color: 'lightgrey'}],
-  '2':[{char:'a', color: 'lightgrey'},{char: 'b', color: 'lightgrey'},{char: 'c', color: 'lightgrey'},{char: 'd', color: 'lightgrey'},{char: 'e', color: 'lightgrey'}],
-  '3':[{char: 'f', color: 'lightgrey'},{char: 'g', color: 'lightgrey'},{char: 'h', color: 'lightgrey'},{char: 'j', color: 'lightgrey'},{char: 'k', color: 'lightgrey'}],
-  '4':[{char: 'f', color: 'lightgrey'},{char: 'g', color: 'lightgrey'},{char: 'h', color: 'lightgrey'},{char: 'j', color: 'lightgrey'},{char: 'k', color: 'lightgrey'}]
-  }*/
-
-  const wordArray = letter.map((ar) => ar.char)
-  const colorArray = letter.map((ar) => ar.color)
-  //console.log('wordarray is:' + wordArray);
 
   const generateGrid = () => {
     const grid = [];
@@ -30,19 +19,37 @@ function SVGGrid({letter}) {
 
   const grid = generateGrid();
 
- // <rect className='wordle-tile' data-testid={`${rowIndex}-${colIndex}`} width='100px' height='100px' rx='15px' color='lightgrey' fill={testArray[rowIndex][colIndex].color ?? 'lightgrey'} />
-            
-  //          <text x={40} y={50}>{testArray[rowIndex][colIndex].char ?? ''}</text>
+  function charUndefinedChecker(arr, row, col){
+    try {
+      return arr.letter[0].attempt[row][col].char
+    }
+    // eslint-disable-next-line no-unused-vars
+    catch (error) {
+      return ''
+    }
+  }
 
+  function colorUndefinedChecker(arr, row, col){
+    try {
+      return arr.letter[0].attempt[row][col].color
+    }
+    // eslint-disable-next-line no-unused-vars
+    catch (error) {
+      return 'lightgrey'
+    }
+  }
+
+  
+ 
   return (
     <div style={{ display: 'grid', gridTemplateColumns: `repeat(${attempts}, 100px)`, gap: '10px' }}>
       {grid.map((row, rowIndex) =>
         row.map((color, colIndex) => 
           <svg key={`${rowIndex}-${colIndex}`} width="100px" height='100px'>
             
-            <rect className='wordle-tile' data-testid={`${rowIndex}-${colIndex}`} width='100px' height='100px' rx='15px' color='lightgrey' fill={colorArray[colIndex] ?? 'lightgrey'} />
+            <rect className='wordle-tile' data-testid={`${rowIndex}-${colIndex}`} width='100px' height='100px' rx='15px' color='lightgrey' fill={colorUndefinedChecker(letter,rowIndex,colIndex) ?? 'lightgrey'} />
             
-            <text x={40} y={50}>{wordArray[colIndex] ?? ''}</text>
+            <text x={40} y={50}>{charUndefinedChecker(letter,rowIndex,colIndex) ?? ''}</text>
             
           </svg>
         )

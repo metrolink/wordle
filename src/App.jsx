@@ -8,7 +8,7 @@ function App() {
   const [keyPresses, setKeyPresses] = useState([])
   const [answerWord] = useState(answer());
   const [attempt, setAttempt] = useState(0)
-  const [fullWords, setFullWords] = useState([keyPresses])
+  const [fullWords, setFullWords] = useState([])
 
   const wordlength = 5;
   const attemptLimit = 5;
@@ -26,16 +26,19 @@ function App() {
           console.log(e.key)
           //checkWord(updatedKeyPresses, answerWord);
           if (keyPresses.length === wordlength -1){
-            const checkedWord = validateAnswer(updatedKeyPresses, answerWord)
-            console.log(checkedWord)
-            setKeyPresses(checkedWord)
+            const checkedWord = validateAnswer(updatedKeyPresses, answerWord);
+            console.log(checkedWord);
+            setKeyPresses(checkedWord);
+            setFullWords([...fullWords,{attempt:[checkedWord]}])
+            console.log(...fullWords,{attempt:[checkedWord]})
+            setAttempt(attempt+1);
           }
         }
         else{
-          setAttempt(attempt+1);
+          
           setKeyPresses([{char: e.key, color: 'lightgrey'}]);
-          setFullWords(...fullWords,[keyPresses])
-          console.log(fullWords)
+          
+          
           //checkWord(e.key, answerWord);
         }
     }
@@ -57,7 +60,7 @@ function App() {
           answer is:{answerWord}
         </p>
       </div>
-      <SVGGrid letter={keyPresses}/>
+      <SVGGrid letter={fullWords}/>
     </>
   )
 }

@@ -20,7 +20,10 @@ export function validateAnswer(word, ans){
         colorArray[i] = 'green';
        }
        else if(ans.includes(wordArray[i])){
-        if((wordString.match(/${ans[i]}/) || []).length > 1){
+        
+        let regEx = new RegExp(`${wordArray[i]}`, 'g')
+        console.log(wordString.match(regEx) || [])
+        if((wordString.match(regEx) || []).length < 2){
         colorArray[i] = 'yellow'
        }
     }
