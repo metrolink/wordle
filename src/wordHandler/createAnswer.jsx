@@ -1,5 +1,5 @@
-import wordList from './wordlist.json'
-import listOfWords from './words.json'
+import wordList from '../wordlist.json'
+import listOfWords from '../words.json'
 
 function generateAnswer() {
     const listOfWords = wordList.words;
@@ -29,9 +29,7 @@ export function validateAnswer(word, ans){
             }
         }
         else if(ans.includes(guessChar[i])){
-
             colorArray[i] = 'yellow'
-            
         }
 
 

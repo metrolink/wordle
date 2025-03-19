@@ -1,7 +1,7 @@
 import './modalDialog.css'
 import React, { useRef,useEffect} from "react";
 
-const Modal = ({ isOpen, hasCloseBtn = true, onClose, children}) => {
+const Modal = ({ isOpen, hasCloseBtn = true, onClose, children, buttonText = 'Try again'}) => {
     const modalRef = useRef(null);
 
     const handleCloseModal = () => {
@@ -33,7 +33,7 @@ const Modal = ({ isOpen, hasCloseBtn = true, onClose, children}) => {
         {children}
         {hasCloseBtn && (
         <button className="modal-close-btn" onClick={handleCloseModal}>
-          Try again
+          {buttonText}
         </button>
       )}
       </dialog>

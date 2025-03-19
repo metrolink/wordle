@@ -1,10 +1,11 @@
 import {useState, useEffect } from 'react'
 import './App.css'
-import { answer, checkWord, validateAnswer} from './createAnswer'
-import SVGGrid from './svgDrawer'
+import { answer, checkWord, validateAnswer} from './wordHandler/createAnswer.jsx'
+import SVGGrid from './wordHandler/wordDrawer.jsx'
 import TempMessage from './notification/invalidMessage.jsx';
-import Congrats from './congratulationsBox/congratsModal.jsx';
-import FailedAttempt from './congratulationsBox/failedModal.jsx';
+import Congrats from './ModalBoxes/congratsModal.jsx';
+import FailedAttempt from './ModalBoxes/failedModal.jsx';
+import Intro from './ModalBoxes/firstModal.jsx';
 
 function App() {
   const [answerWord, setAnswerWord] = useState(answer());
@@ -12,38 +13,39 @@ function App() {
   const [fullWords, setFullWords] = useState([])
   const [finished, setFinished] = useState(false)
   const [wrongWord, setWrongWord] = useState(false)
+  const [firstTime, setFirstTime] = useState(true)
 
   const wordlength = 5;
   const attemptLimit = 5;
 
+  //Should have found a way to reduce if statements in this function.
   function handleInput(button){
-    if(button.key.length < 2){
-      if(attempt < attemptLimit){
-        if(!finished){
-          if((fullWords.length % wordlength) > 0){
-            const updatedFullWords = [...fullWords,{char:button.key, color: 'lightgrey'}]
-            setFullWords(updatedFullWords)
-            
+    if((button.key.length < 2) && (attempt < attemptLimit) && (!finished)){
+      if((fullWords.length % wordlength) > 0){
 
-            if ((fullWords.length % wordlength) === wordlength -1){
-              const checkedWord = validateAnswer(updatedFullWords, answerWord);
-              setFinished(checkWord(checkedWord))
-              setFullWords(checkedWord)
-              
-              if(checkedWord !== updatedFullWords){
+        const updatedFullWords = [...fullWords,{char:button.key, color: 'lightgrey'}]
+        setFullWords(updatedFullWords)
+            
+        if ((fullWords.length % wordlength) === wordlength -1){
+
+          const checkedWord = validateAnswer(updatedFullWords, answerWord);
+          setFinished(checkWord(checkedWord))
+          setFullWords(checkedWord)
+          if(!checkWord(checkedWord)){
+            if(checkedWord !== updatedFullWords){
+
               setAttempt(attempt+1);
               
-              }
-              else{
-                setWrongWord(true)
-              }
+            }
+            else{
+              setWrongWord(true)
             }
           }
-          else{
-            setWrongWord(false)
-            setFullWords([...fullWords,{char:button.key, color: 'lightgrey'}])
-          }
         }
+      }
+      else{
+        setWrongWord(false)
+        setFullWords([...fullWords,{char:button.key, color: 'lightgrey'}])
       }
     }
     else if(button.key === 'Backspace'){
@@ -70,6 +72,10 @@ function App() {
 
   };
 
+  const handleFirstModal = () => {
+    setFirstTime(false)
+  }
+
 
 
   return (
@@ -77,15 +83,20 @@ function App() {
       <div> 
         <TempMessage wrong={wrongWord}/>
       </div>
+      
+      <h1>Wordle</h1>
+      <p>Press keys on your keyboard to input words</p>
+      <SVGGrid letter={fullWords}/>
+
       <div>
         <Congrats isOpen={finished} answer={answerWord} onClose={handleResetModal}/>
       </div>
       <div>
         <FailedAttempt isOpen={(attempt >= attemptLimit)} answer={answerWord} onClose={handleResetModal}/>
       </div>
-      <h1>Wordle</h1>
-      <p>Press buttons on your keyboard to begin</p>
-      <SVGGrid letter={fullWords}/>
+      <div>
+        <Intro isOpen={firstTime} onClose={handleFirstModal} />
+      </div>
     </>
   )
 }
