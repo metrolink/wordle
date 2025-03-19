@@ -5,8 +5,6 @@ function SVGGrid(letter) {
   const characters = 5;
   const attempts = 5;
 
-  console.log(letter);
-
   const generateGrid = () => {
     const grid = [];
     for (let i = 0; i < characters; i++) {
@@ -44,14 +42,14 @@ function SVGGrid(letter) {
   
  
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: `repeat(${attempts}, 100px)`, gap: '10px' }}>
+    <div style={{width:'40%', display: 'grid', gridTemplateColumns: `repeat(${attempts}, 50%)`, gap: '5%' }}>
       {grid.map((row, rowIndex) =>
         row.map((color, colIndex) => 
-          <svg key={`${rowIndex}-${colIndex}`} width="100px" height='100px'>
+          <svg key={`${rowIndex}-${colIndex}`} width="60px" height='60px'>
             
-            <rect className='wordle-tile' data-testid={`${rowIndex}-${colIndex}`} width='100px' height='100px' rx='15px' color='lightgrey' fill={colorUndefinedChecker(letter,rowIndex,colIndex) ?? 'lightgrey'} />
+            <rect className='wordle-tile' data-testid={`${rowIndex}-${colIndex}`} width='100%' height='100%' rx='15px' color='lightgrey' fill={colorUndefinedChecker(letter,rowIndex,colIndex) ?? 'lightgrey'} />
             
-            <text x={40} y={50}>{charUndefinedChecker(letter,rowIndex,colIndex) ?? ''}</text>
+            <text x={'40%'} y={'60%'} fontSize={35}>{charUndefinedChecker(letter,rowIndex,colIndex) ?? ''}</text>
             
           </svg>
         )
