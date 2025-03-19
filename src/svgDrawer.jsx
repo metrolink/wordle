@@ -1,36 +1,61 @@
-import {React, useState} from "react";
-import ReactDom from 'react-dom'
 
-// Usage in JSX
-export function SvgDrawer() {
-    const [color, setColor] = useState([]);
+import React from 'react';
 
-    const arrayHeight = 5;
-    const arrayWidth = 5;
+function SVGGrid(letter) {
+  const characters = 5;
+  const attempts = 5;
 
+  const generateGrid = () => {
+    const grid = [];
+    for (let i = 0; i < characters; i++) {
+      const row = [];
+      for (let j = 0; j < attempts; j++) {
+        row.push('');
+      }
+      grid.push(row);
+    }
+    return grid;
+  };
+
+  const grid = generateGrid();
+
+  function charUndefinedChecker(arr, row, col){
+    try {
+      return arr.letter[(row*5)+(col)].char
+    }
     // eslint-disable-next-line no-unused-vars
-    const changeColor = (newColor) => setColor(newColor);
+    catch (error) {
+      return ''
+    }
+  }
 
+  function colorUndefinedChecker(arr, row, col){
+    try {
+      return arr.letter[(row*5+(col))].color
+    }
+    // eslint-disable-next-line no-unused-vars
+    catch (error) {
+      return 'lightgrey'
+    }
+  }
 
-        const array = [[]];
-
-        for(var i = 0; i < arrayHeight; i++){
-            array.push([])
-            for(var j = 0; j < arrayWidth; j++){
-                array[i].push('lightgrey')
-            }
-        }
-    
-
+  
+ 
   return (
-    <div>
-    {array.map(
-        <div>
-            <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg" fill={'lightgrey'}>
-                <rect width='100px' height='100px' rx='15' fill='lightgrey'/>
-            </svg>
-        </div>
-    )}
+    <div style={{width:'40%', display: 'grid', gridTemplateColumns: `repeat(${attempts}, 50%)`, gap: '5%' }}>
+      {grid.map((row, rowIndex) =>
+        row.map((color, colIndex) => 
+          <svg key={`${rowIndex}-${colIndex}`} width="60px" height='60px'>
+            
+            <rect className='wordle-tile' data-testid={`${rowIndex}-${colIndex}`} width='100%' height='100%' rx='15px' color='lightgrey' fill={colorUndefinedChecker(letter,rowIndex,colIndex) ?? 'lightgrey'} />
+            
+            <text x={'40%'} y={'60%'} fontSize={35}>{charUndefinedChecker(letter,rowIndex,colIndex) ?? ''}</text>
+            
+          </svg>
+        )
+      )}
     </div>
   );
-};
+}
+
+export default SVGGrid

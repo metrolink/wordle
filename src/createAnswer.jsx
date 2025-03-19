@@ -22,13 +22,16 @@ export function validateAnswer(word, ans){
         for (let i = 0; i < guess.length; i++) {
         if(guessChar[i] === ans[i]){
             colorArray[i] = 'green';
+            for (let j = i-1; j > 0; j--) {
+                if(guessChar[i] === guessChar[j] && colorArray[j] === 'yellow'){
+                    keys[j].color = 'lightgrey'
+                }
+            }
         }
         else if(ans.includes(guessChar[i])){
-        
-            let regEx = new RegExp(`${guessChar[i]}`, 'g')
-            if((wordString.match(regEx) || []).length < 2){
+
             colorArray[i] = 'yellow'
-            }
+            
         }
 
 
@@ -39,7 +42,7 @@ export function validateAnswer(word, ans){
         return word.concat(keys);
     }
     else{
-        alert("not a valid word")
+        //alert("not a valid word")
         return word
     }
 }

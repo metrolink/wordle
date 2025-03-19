@@ -1,0 +1,10 @@
+#notification{
+    position:sticky;
+    top:10px;
+    height: 50%;
+    width: 100%;
+    background-color: lightblue;
+    font-size: x-large;
+    border-radius: 20%;
+    padding:10%;
+}
