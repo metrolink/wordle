@@ -10,18 +10,21 @@ function generateAnswer() {
 
 export function validateAnswer(word, ans){
     
-    const wordArray = word.map(ch => ch.char)
-    const wordString = wordArray.join('');
+
+    const guess = word.splice(word.length-5,word.length)
+    const guessChar = guess.map(ch => ch.char)
+
+    const wordString = guessChar.join('');
     if(listOfWords.words.includes(wordString)){
-    const colorArray = word.map(clr => clr.color)
+    const colorArray = guess.map(clr => clr.color)
     const keys = [];
-    for (let i = 0; i < wordArray.length; i++) {
-       if(wordArray[i] === ans[i]){
+    for (let i = 0; i < guess.length; i++) {
+       if(guessChar[i] === ans[i]){
         colorArray[i] = 'green';
        }
-       else if(ans.includes(wordArray[i])){
+       else if(ans.includes(guessChar[i])){
         
-        let regEx = new RegExp(`${wordArray[i]}`, 'g')
+        let regEx = new RegExp(`${guessChar[i]}`, 'g')
         console.log(wordString.match(regEx) || [])
         if((wordString.match(regEx) || []).length < 2){
         colorArray[i] = 'yellow'
@@ -30,10 +33,10 @@ export function validateAnswer(word, ans){
 
 
        
-        keys.push({char: wordArray[i],color: colorArray[i]})
+        keys.push({char: guessChar[i],color: colorArray[i]})
     }
 
-    return keys;
+    return word.concat(keys);
     }
     else{
         console.log("not a valid word")

@@ -5,6 +5,8 @@ function SVGGrid(letter) {
   const characters = 5;
   const attempts = 5;
 
+  console.log(letter);
+
   const generateGrid = () => {
     const grid = [];
     for (let i = 0; i < characters; i++) {
@@ -21,7 +23,7 @@ function SVGGrid(letter) {
 
   function charUndefinedChecker(arr, row, col){
     try {
-      return arr.letter[0].attempt[row][col].char
+      return arr.letter[(row*5)+(col)].char
     }
     // eslint-disable-next-line no-unused-vars
     catch (error) {
@@ -31,7 +33,7 @@ function SVGGrid(letter) {
 
   function colorUndefinedChecker(arr, row, col){
     try {
-      return arr.letter[0].attempt[row][col].color
+      return arr.letter[(row*5+(col))].color
     }
     // eslint-disable-next-line no-unused-vars
     catch (error) {

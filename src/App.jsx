@@ -21,22 +21,28 @@ function App() {
       if(!checkWord(keyPresses,answerWord)){
         if(keyPresses.length < wordlength){
           const updatedKeyPresses = [...keyPresses,{char: e.key, color: 'lightgrey'}];
+          const updatedFullWords = [...fullWords,{char:e.key, color: 'lightgrey'}]
           //console.log(updatedKeyPresses)
           setKeyPresses(updatedKeyPresses);
+          setFullWords(updatedFullWords)
           console.log(e.key)
           //checkWord(updatedKeyPresses, answerWord);
           if (keyPresses.length === wordlength -1){
-            const checkedWord = validateAnswer(updatedKeyPresses, answerWord);
+            const checkedWord = validateAnswer(updatedFullWords, answerWord);
             console.log(checkedWord);
-            setKeyPresses(checkedWord);
-            setFullWords([...fullWords,{attempt:[checkedWord]}])
-            console.log(...fullWords,{attempt:[checkedWord]})
+            //setKeyPresses(checkedWord);
+            setFullWords(checkedWord)
+            
+            //setFullWords([...fullWords,{(attempt):[checkedWord]}])
+            console.log(...fullWords,[checkedWord])
             setAttempt(attempt+1);
           }
         }
         else{
           
           setKeyPresses([{char: e.key, color: 'lightgrey'}]);
+          setFullWords([...fullWords,{char:e.key, color: 'lightgrey'}])
+
           
           
           //checkWord(e.key, answerWord);

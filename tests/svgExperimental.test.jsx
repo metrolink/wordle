@@ -13,8 +13,9 @@ describe('testing if the grid is displaying correct colors', () => {
 
 
     render(<SVGGrid letter={validatedKeys}/>)
-    
-    expect(screen.getByTestId('0-1')).toHaveAttribute('fill','yellow');
+
+    expect(validatedKeys.length).toBe(5);
+    expect(screen.getByTestId('0-1')).toHaveAttribute('fill','lightgrey');
     expect(screen.getByTestId('0-2')).toHaveAttribute('fill','green')
   })
 })
