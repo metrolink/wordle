@@ -36,7 +36,6 @@ function App() {
               }
               else{
                 setWrongWord(true)
-                console.log(wrongWord)
               }
             }
           }
@@ -46,6 +45,10 @@ function App() {
           }
         }
       }
+    }
+    else if(button.key === 'Backspace'){
+      fullWords.pop()
+      setFullWords([...fullWords])
     }
   }
 
