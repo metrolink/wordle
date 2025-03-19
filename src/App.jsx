@@ -18,24 +18,23 @@ function App() {
   const wordlength = 5;
   const attemptLimit = 5;
 
-  //Should have found a way to reduce if statements in this function.
+  //Should have found a way to reduce if statements in this function. And improve readability
   function handleInput(button){
     if((button.key.length < 2) && (attempt < attemptLimit) && (!finished)){
       if((fullWords.length % wordlength) > 0){
 
         const updatedFullWords = [...fullWords,{char:button.key, color: 'lightgrey'}]
         setFullWords(updatedFullWords)
-            
+
         if ((fullWords.length % wordlength) === wordlength -1){
 
           const checkedWord = validateAnswer(updatedFullWords, answerWord);
           setFinished(checkWord(checkedWord))
           setFullWords(checkedWord)
+
           if(!checkWord(checkedWord)){
             if(checkedWord !== updatedFullWords){
-
               setAttempt(attempt+1);
-              
             }
             else{
               setWrongWord(true)
@@ -86,7 +85,7 @@ function App() {
       
       <h1>Wordle</h1>
       <p>Press keys on your keyboard to input words</p>
-      <SVGGrid letter={fullWords}/>
+      <SVGGrid letter={fullWords} maxChar={wordlength} maxAttempts={attemptLimit}/>
 
       <div>
         <Congrats isOpen={finished} answer={answerWord} onClose={handleResetModal}/>

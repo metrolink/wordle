@@ -1,9 +1,9 @@
 
 import React from 'react';
 
-function SVGGrid(letter) {
-  const characters = 5;
-  const attempts = 5;
+function SVGGrid({letter, maxChar, maxAttempts}) {
+  const characters = maxChar;
+  const attempts = maxAttempts;
 
   const generateGrid = () => {
     const grid = [];
@@ -21,7 +21,7 @@ function SVGGrid(letter) {
 
   function charUndefinedChecker(arr, row, col){
     try {
-      return arr.letter[(row*5)+(col)].char
+      return arr[(row*5)+(col)].char
     }
     // eslint-disable-next-line no-unused-vars
     catch (error) {
@@ -31,7 +31,7 @@ function SVGGrid(letter) {
 
   function colorUndefinedChecker(arr, row, col){
     try {
-      return arr.letter[(row*5+(col))].color
+      return arr[(row*5+(col))].color
     }
     // eslint-disable-next-line no-unused-vars
     catch (error) {
