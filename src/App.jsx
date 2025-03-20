@@ -20,31 +20,26 @@ function App() {
 
   //Should have found a way to reduce if statements in this function. And improve readability
   function handleInput(button){
-    if((button.key.length < 2) && (attempt < attemptLimit) && (!finished)){
-      if((fullWords.length % wordlength) > 0){
+    const re = new RegExp("\\b[a-zA-z]\\b")
+    if((re.test(button.key)) && (attempt < attemptLimit) && (!finished)){
 
-        const updatedFullWords = [...fullWords,{char:button.key, color: 'lightgrey'}]
-        setFullWords(updatedFullWords)
+      const updatedFullWords = [...fullWords,{char:button.key, color: 'lightgrey'}]
+      setFullWords(updatedFullWords)
 
-        if ((fullWords.length % wordlength) === wordlength -1){
+      if ((fullWords.length % wordlength) === wordlength -1){
 
-          const checkedWord = validateAnswer(updatedFullWords, answerWord);
-          setFinished(checkWord(checkedWord))
-          setFullWords(checkedWord)
+        const checkedWord = validateAnswer(updatedFullWords, answerWord);
+        setFinished(checkWord(checkedWord))
+        setFullWords(checkedWord)
 
-          if(!checkWord(checkedWord)){
-            if(checkedWord !== updatedFullWords){
-              setAttempt(attempt+1);
-            }
-            else{
-              setWrongWord(true)
-            }
+        if(!checkWord(checkedWord)){
+          if(checkedWord !== updatedFullWords){
+            setAttempt(attempt+1);
+          }
+          else{
+            setWrongWord(true)
           }
         }
-      }
-      else{
-        setWrongWord(false)
-        setFullWords([...fullWords,{char:button.key, color: 'lightgrey'}])
       }
     }
     else if(button.key === 'Backspace'){
