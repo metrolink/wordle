@@ -42,7 +42,7 @@ function App() {
         }
       }
     }
-    else if(button.key === 'Backspace'){
+    else if(button.key === 'Backspace' && (fullWords.length % wordlength) != 0){
       fullWords.pop()
       setFullWords([...fullWords])
     }
