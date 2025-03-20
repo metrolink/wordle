@@ -19,9 +19,11 @@ function SVGGrid({letter, maxChar, maxAttempts}) {
 
   const grid = generateGrid();
 
+
   function charUndefinedChecker(arr, row, col){
     try {
-      return arr[(row*5)+(col)].char
+      //since the array is one long list, row*5 will get the appropriate section of the array
+      return arr[(row*maxChar)+(col)].char
     }
     // eslint-disable-next-line no-unused-vars
     catch (error) {
@@ -31,7 +33,8 @@ function SVGGrid({letter, maxChar, maxAttempts}) {
 
   function colorUndefinedChecker(arr, row, col){
     try {
-      return arr[(row*5+(col))].color
+      //since the array is one long list, row*5 will get the appropriate section of the array
+      return arr[(row*maxChar+(col))].color
     }
     // eslint-disable-next-line no-unused-vars
     catch (error) {

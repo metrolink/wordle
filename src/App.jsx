@@ -1,7 +1,7 @@
 import {useState, useEffect } from 'react'
 import './App.css'
 import { answer, checkWord, validateAnswer} from './wordHandler/createAnswer.jsx'
-import SVGGrid from './wordHandler/wordDrawer.jsx'
+import SVGGrid from './wordHandler/SVGGrid.jsx'
 import TempMessage from './notification/invalidMessage.jsx';
 import Congrats from './ModalBoxes/congratsModal.jsx';
 import FailedAttempt from './ModalBoxes/failedModal.jsx';
@@ -18,13 +18,14 @@ function App() {
   const wordlength = 5;
   const attemptLimit = 5;
 
-  //Should have found a way to reduce if statements in this function. And improve readability
+  //TODO: Should find a way to reduce if statements in this function.
   function handleInput(button){
     const re = new RegExp("\\b[a-zA-z]\\b")
     if((re.test(button.key)) && (attempt < attemptLimit) && (!finished)){
 
       const updatedFullWords = [...fullWords,{char:button.key, color: 'lightgrey'}]
       setFullWords(updatedFullWords)
+      setWrongWord(false)
 
       if ((fullWords.length % wordlength) === wordlength -1){
 

@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import { render, screen } from '@testing-library/react'
-import SVGGrid from './wordDrawer'
+import SVGGrid from './SVGGrid'
 import { validateAnswer } from './createAnswer'
 import { describe, expect } from 'vitest'
 
@@ -12,7 +12,7 @@ describe('testing if the grid is displaying correct colors', () => {
     const validatedKeys = validateAnswer(keyPresses,'water')
 
 
-    render(<SVGGrid letter={validatedKeys}/>)
+    render(<SVGGrid letter={validatedKeys} maxAttempts={5} maxChar={5}/>)
 
 
     expect(screen.getByTestId('0-1')).toHaveAttribute('fill','lightgrey');
