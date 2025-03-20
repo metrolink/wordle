@@ -7,7 +7,7 @@ import { describe, expect } from 'vitest'
 describe('testing if the grid is displaying correct colors', () => {
   it('renders colors correctly', () => {
 
-    const keyPresses = [{char:'o', color: 'lightgrey'},{char: 't', color: 'lightgrey'},{char: 't', color: 'green'},{char: 'e', color: 'green'},{char: 'r', color: 'green'}]
+    const keyPresses = [{char:'o', color: 'lightgrey'},{char: 't', color: 'lightgrey'},{char: 't', color: 'lightgrey'},{char: 'e', color: 'lightgrey'},{char: 'r', color: 'lightgrey'}]
 
     const validatedKeys = validateAnswer(keyPresses,'water')
 
