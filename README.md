@@ -13,7 +13,13 @@ If you are developing a production application, we recommend using TypeScript an
 
 # Start application:
 
-To start the application, run
+First install the dependencies by running
+
+```
+npm install
+```
+
+Then start the application with the command
 
 ```
 npm run dev
